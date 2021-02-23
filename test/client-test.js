@@ -53,5 +53,17 @@ describe("SocketTester", () => {
         })
     })
 
+    describe("wait until", () => {
+        it("resolves when a predicate is true", async () => {
+            const tester = new SocketTester(client);
+            const pongs = tester.on('pong');
+            
+            client.emit('ping', 1);
+            client.emit('ping', 2);
+            await pongs.waitUntil(value => value === 3)
+            assert.equal(pongs.get(1), 3)
+        })
+    })
+
 
 });

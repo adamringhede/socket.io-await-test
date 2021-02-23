@@ -26,5 +26,5 @@ npm install --save-dev socket.io-await-test
 
 Import in your test
 ```js
-const { SocketTester } = require("../dist/index");
+const { SocketTester } = require('socket.io-await-test')
 ```

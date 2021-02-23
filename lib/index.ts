@@ -37,10 +37,21 @@ class SocketSubscription<T> {
 		})
 	}
 
-	private waitFor(predicate: () => any) {
+	private waitFor(predicate: () => boolean) {
 		return new Promise((resolve, reject) => {
 			this.handlers.push(new SubscriptionHandler(resolve, predicate))
 		})
+	}
+
+	public waitUntil(predicate: (value: T) => boolean) {
+		return this.waitFor(() => {
+			const last = this.responses[this.responses.length - 1]
+			return last != null && predicate(last)
+		})
+	}
+
+	public waitForAny() {
+		return this.waitForEvents(1);
 	}
 
 	public waitForEvents(num: number) {
