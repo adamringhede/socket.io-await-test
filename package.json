@@ -1,6 +1,6 @@
 {
   "name": "socket.io-await-test",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tool to test socket io servers more easily without dealing with callbacks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,12 @@
     "test": "tsc && mocha --reporter spec",
     "prepublish": "tsc"
   },
-  "author": "",
+  "homepage": "https://github.com/adamringhede/socket.io-await-test",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adamringhede/socket.io-await-test.git"
+  },
+  "author": "Adam Ringhede",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.3.0",
