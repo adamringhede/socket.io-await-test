@@ -1,7 +1,7 @@
 
 import { io, Socket } from "socket.io-client";
 
-type ResolverFn = (value: unknown) => any;
+type ResolverFn = (value: null) => any;
 
 class SubscriptionHandler {
 	constructor(private resolver: ResolverFn, private predicate: () => boolean) {}
@@ -37,7 +37,7 @@ class SocketSubscription<T> {
 		})
 	}
 
-	private waitFor(predicate: () => boolean) {
+	private waitFor(predicate: () => boolean): Promise<null> {
 		return new Promise((resolve, reject) => {
 			this.handlers.push(new SubscriptionHandler(resolve, predicate))
 		})
@@ -66,8 +66,8 @@ class SocketSubscription<T> {
 class SocketTester {
 	constructor(private socket: Socket) {}
 
-	public on(name: string) {
-		return new SocketSubscription(this.socket, name);
+	public on<T>(name: string) {
+		return new SocketSubscription<T>(this.socket, name);
 	}
 }
 
